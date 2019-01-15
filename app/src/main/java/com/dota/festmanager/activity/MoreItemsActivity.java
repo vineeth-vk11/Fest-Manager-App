@@ -6,7 +6,9 @@ import android.support.v7.widget.Toolbar;
 
 import com.dota.festmanager.R;
 import com.dota.festmanager.fragment.AboutFragment;
+import com.dota.festmanager.fragment.ContactsFragment;
 import com.dota.festmanager.fragment.CreditsFragment;
+import com.dota.festmanager.fragment.MapsFragment;
 import com.dota.festmanager.fragment.ReachUsFragment;
 import com.dota.festmanager.fragment.SettingsFragment;
 
@@ -42,11 +44,23 @@ public class MoreItemsActivity extends AppCompatActivity {
                 break;
             case 2:
                 getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_fragment_container, new MapsFragment())
+                        .commit();
+                getSupportActionBar().setTitle("Directions");
+                break;
+            case 3:
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.nav_fragment_container, new ContactsFragment())
+                        .commit();
+                getSupportActionBar().setTitle("Contact Us");
+                break;
+            case 4:
+                getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_fragment_container, new CreditsFragment())
                         .commit();
                 getSupportActionBar().setTitle("App Credits");
                 break;
-            case 3:
+            case 5:
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.nav_fragment_container, new SettingsFragment())
                         .commit();

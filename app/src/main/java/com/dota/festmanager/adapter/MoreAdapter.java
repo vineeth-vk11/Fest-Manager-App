@@ -53,9 +53,14 @@ public class MoreAdapter extends RecyclerView.Adapter<MoreAdapter.MoreViewHolder
                 holder.moreitemIcon.setImageResource(R.drawable.ic_bus_24px);
                 break;
             case 2:
-                holder.moreitemIcon.setImageResource(R.drawable.ic_credits);
+                //todo set icon
                 break;
             case 3:
+                break;
+            case 4:
+                holder.moreitemIcon.setImageResource(R.drawable.ic_credits);
+                break;
+            case 5:
                 holder.moreitemIcon.setImageResource(R.drawable.ic_baseline_settings_20px);
                 break;
         }

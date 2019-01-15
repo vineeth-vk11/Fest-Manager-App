@@ -38,6 +38,11 @@ public class HomeFragment extends Fragment {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
+                    case R.id.live:
+                        getChildFragmentManager().beginTransaction()
+                                .replace(R.id.bottom_nav_container, new LiveFragment())
+                                .commit();
+                        break;
                     case R.id.feed:
                         getChildFragmentManager().beginTransaction()
                                 .replace(R.id.bottom_nav_container, new FeedFragment())
@@ -70,7 +75,7 @@ public class HomeFragment extends Fragment {
         };
         mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         if (savedInstanceState == null) {
-            mBottomNavigationView.setSelectedItemId(R.id.feed);
+            mBottomNavigationView.setSelectedItemId(R.id.events);
         }
     }
 }

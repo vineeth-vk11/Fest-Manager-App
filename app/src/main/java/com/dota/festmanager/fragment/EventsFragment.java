@@ -12,11 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dota.festmanager.R;
 import com.dota.festmanager.adapter.EventsAdapter;
+import com.dota.festmanager.adapter.EventsGridAdapter;
 import com.dota.festmanager.api.ApiClient;
 import com.dota.festmanager.api.EventsInterface;
 import com.dota.festmanager.model.EventDetails;
@@ -33,6 +35,7 @@ public class EventsFragment extends Fragment {
     private ArrayList<EventDetails> eventDetailsList = new ArrayList<>();
     private ArrayList<EventDetails> realmList = new ArrayList<>();
     private RecyclerView recyclerView;
+    private GridView gridView;
     private SwipeRefreshLayout swipeRefreshLayout;
     private Realm realm;
     private Context context;
@@ -76,7 +79,8 @@ public class EventsFragment extends Fragment {
 
         Realm.init(context);
         realm = Realm.getDefaultInstance();
-        recyclerView = getActivity().findViewById(R.id.event_recycler_view);
+//        recyclerView = getActivity().findViewById(R.id.event_recycler_view);
+        gridView = getActivity().findViewById(R.id.events_grid);
         swipeRefreshLayout = getActivity().findViewById(R.id.swipe_to_refresh);
         progressBar = getActivity().findViewById(R.id.progress_bar);
         progressBar.setVisibility(View.VISIBLE);
@@ -184,8 +188,9 @@ public class EventsFragment extends Fragment {
     }
 
     private void setAdapter(ArrayList<EventDetails> eventList) {
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new EventsAdapter(eventList, context));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerView.setAdapter(new EventsAdapter(eventList, context));
+        gridView.setAdapter(new EventsGridAdapter(eventList, context));
     }
 
     @Override
