@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.dota.arena2019.R;
 import com.dota.arena2019.activity.DetailsActivity;
+import com.dota.arena2019.activity.MatchesActivity;
 import com.dota.arena2019.model.EventDetails;
 
 import java.util.ArrayList;
@@ -58,8 +59,9 @@ public class EventsGridAdapter extends BaseAdapter{
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, DetailsActivity.class);
+                Intent intent = new Intent(context, MatchesActivity.class);
                 intent.putExtra("id", list.get(i).getId());
+                intent.putExtra("name",list.get(i).getName());
                 view.getContext().startActivity(intent);
             }
         });
