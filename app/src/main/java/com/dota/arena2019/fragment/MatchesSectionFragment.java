@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dota.arena2019.R;
+import com.dota.arena2019.adapter.MatchLiveAdapter1;
 import com.dota.arena2019.adapter.MatchScheduleAdapter;
+import com.dota.arena2019.model.LiveMatchType1;
 import com.dota.arena2019.model.MatchDetails;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,24 +63,50 @@ public class MatchesSectionFragment extends Fragment {
             case 1:
                 break;
             case 2:
+                final ArrayList<LiveMatchType1> list2 = new ArrayList<>();
+                FirebaseDatabase.getInstance().getReference().child("Scores").child("Live Matches").child(eventId).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(dataSnapshot!=null){
+                            for(DataSnapshot ds:dataSnapshot.getChildren())
+                                list2.add(ds.getValue(LiveMatchType1.class));
+
+                        }
+                        if(list2.size()==0) {
+                            status.setText("No matches are live currently");
+                            status.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            status.setVisibility(View.GONE);
+                            adapter = new MatchLiveAdapter1(getActivity(),list2);
+                            rootView.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
                 break;
             case 3:
-                final ArrayList<MatchDetails> list = new ArrayList<>();
+                final ArrayList<MatchDetails> list3 = new ArrayList<>();
                 FirebaseDatabase.getInstance().getReference().child("Scores").child("Upcoming Matches").child(eventId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if(dataSnapshot!=null){
                             for(DataSnapshot ds:dataSnapshot.getChildren())
-                                list.add(ds.getValue(MatchDetails.class));
+                                list3.add(ds.getValue(MatchDetails.class));
 
                         }
-                        if(list.size()==0) {
+                        if(list3.size()==0) {
                             status.setText("Schedule not yet Updated");
                             status.setVisibility(View.VISIBLE);
                         }
                         else {
                             status.setVisibility(View.GONE);
-                            adapter = new MatchScheduleAdapter(getActivity(),list);
+                            adapter = new MatchScheduleAdapter(getActivity(),list3);
                             rootView.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
                         }
